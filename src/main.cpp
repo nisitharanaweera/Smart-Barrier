@@ -15,7 +15,7 @@
 #define WIFI_SSID "RAND-MIFI"
 #define WIFI_PASSWORD "reddeadred"
 
-// #define WIFI_SSID "UOC Staff"
+// #define WIFI_SSID "UOC_Staff"
 // #define WIFI_PASSWORD "admin106"
 
 // Firebase project API Key
@@ -54,6 +54,7 @@ const char* ntpServer = "pool.ntp.org";
 // unsigned long sendDataPrevMillis = 0;
 // unsigned long timerDelay = 180000;
 String logD = "";
+
 
 
 //--------------------------------------------------------------
@@ -129,6 +130,7 @@ void setup() {
   pinMode(armingLed, OUTPUT);
   pinMode(disarmingLed, OUTPUT);
 
+//---------------------------------Firebase U ID claiming-----------------------------------
   // Assign the api key 
   config.api_key = API_KEY;
 
@@ -165,6 +167,8 @@ void setup() {
   // Update database path
   databasePath = "/UsersData/" + uid + "/readings";
 
+//---------------------------------Firebase U ID claiming end----------------------------
+
 
 
 }
@@ -176,11 +180,11 @@ void setup() {
 
 
 void loop() {
+  String m = "";
+
   if (digitalRead(masterPwr) == LOW) {
-    String m = "Master Power";
+    m = "Master Power";
     digitalWrite(masterPwrLed, HIGH);
-    sendData(m);
-    Serial.println(m);
     delay(200);
     while (digitalRead(masterPwr) == LOW) {
     }
@@ -188,20 +192,16 @@ void loop() {
   }
   
   if (digitalRead(panicStop) == LOW) {
-    String m = "Panic Stop Initiated!";
+    m = "Panic Stop Initiated!";
     digitalWrite(panicStopLed, HIGH);
-    sendData(m);
-    Serial.println(m);
     delay(200);
     while (digitalRead(panicStop) == LOW) {
     }
     digitalWrite(panicStopLed, LOW);
   }
   if (digitalRead(reset) == LOW) {
-    String m = "Resetting the System";
+    m = "Resetting the System";
     digitalWrite(resetLed, HIGH);
-    sendData(m);
-    Serial.println(m);
     delay(200);
     while (digitalRead(reset) == LOW) {
     }
@@ -209,10 +209,8 @@ void loop() {
   }
 
   if (digitalRead(arming) == LOW) {
-    String m = "System Arming";
+    m = "System Arming";
     digitalWrite(armingLed, HIGH);
-    sendData(m);
-    Serial.println(m);
     delay(200);
     while (digitalRead(arming) == LOW) {
     }
@@ -220,10 +218,8 @@ void loop() {
   }
 
   if (digitalRead(disarming) == LOW) {
-    String m = "System Disarming";
+    m = "System Disarming";
     digitalWrite(disarmingLed, HIGH);
-    sendData(m);
-    Serial.println(m);
     delay(200); // Debounce delay
     while (digitalRead(disarming) == LOW) {
     }
@@ -231,7 +227,11 @@ void loop() {
   }
 
   
-  
+  if ( m !="" ){
+    sendData(m);
+    Serial.println(m);
+
+  }
 
 }
 
