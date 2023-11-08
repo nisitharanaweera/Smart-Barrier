@@ -12,7 +12,10 @@
 
 
 // Wifi Credentials
-#define WIFI_SSID "RAND-MIFI"
+// #define WIFI_SSID "RAND-MIFI"
+// #define WIFI_PASSWORD "reddeadred"
+
+#define WIFI_SSID "RAND Sams"
 #define WIFI_PASSWORD "reddeadred"
 
 // #define WIFI_SSID "UOC_Staff"
@@ -200,7 +203,7 @@ void loop() {
     digitalWrite(panicStopLed, LOW);
   }
   if (digitalRead(reset) == LOW) {
-    m = "Resetting the System";
+    m = "System Reset";
     digitalWrite(resetLed, HIGH);
     delay(200);
     while (digitalRead(reset) == LOW) {

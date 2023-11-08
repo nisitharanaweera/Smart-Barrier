@@ -2,6 +2,10 @@
 	"folders": [
 		{
 			"path": "../.."
+		},
+		{
+			"name": "SBABC2_0",
+			"path": "../../SBABC2_0"
 		}
 	],
 	"settings": {}
